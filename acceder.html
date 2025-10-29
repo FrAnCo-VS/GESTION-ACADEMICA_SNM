@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión Académica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="p-6">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // CONFIGURACIÓN SUPABASE (Mantenido)
+            const SUPABASE_URL = 'https://qxrlurrdmzntcenscona.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4cmx1cnJkbXpudGNlbnNjb25hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2Nzg1MzIsImV4cCI6MjA3NzI1NDUzMn0.XUzNXu4CHE9yuLkOE-6sLfFBTMuIeeG0WHbUlNLFKJo';
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            
+            // Referencias DOM
+            const tabContents = document.querySelectorAll('.tab-content');
+            const mainContent = document.getElementById('main-content');
+            const loginForm = document.getElementById('loginForm');
+            const userIdDisplay = document.getElementById('userIdDisplay');
+            const notificationToast = document.getElementById('notification-toast');
+            
+            // BOTONES DE ACCIÓN PARA NOTIFICACIÓN
+            const studentSaveBtn = document.getElementById('student-save-btn');
+            const teacherSaveBtn = document.getElementById('teacher-save-btn');
+            const adminSaveBtn = document.getElementById('admin-save-btn');
+
+            // --- Lógica de Notificación ---
+            function showNotification(message, duration = 3000) {
+                notificationToast.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    notificationToast.classList.add('show');
+                }, 10); 
+
+                setTimeout(() => {
+                    notificationToast.classList.remove('show');
+                    
+                    setTimeout(() => {
+                        notificationToast.classList.add('hidden');
+                    }, 500); 
+                }, duration);
+            }
+            // -----------------------------
+
+            // Función genérica para mostrar vistas y sidebar por defecto
+            function showView(viewId, role) {
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                const selectedView = document.getElementById(viewId);
+                if (selectedView) {
+                    selectedView.classList.remove('hidden');
+                }
+                
+                if (viewId !== 'login-tab') {
+                    mainContent.classList.remove('hidden');
+                } else {
+                    mainContent.classList.add('hidden');
+                }
+
+                // Lógica de activación de vista por defecto y sidebar al cambiar de rol
+                const resetActiveViews = (selector) => {
+                    document.querySelectorAll(selector).forEach(view => view.classList.add('hidden'));
+                };
+                const resetActiveButtons = (selector) => {
+                    document.querySelectorAll(selector).forEach(btn => btn.classList.remove('active-tab'));
+                };
+
+                // Resetear todas las vistas y botones de los tres portales
+                resetActiveViews('.student-content-view');
+                resetActiveViews('.teacher-content-view');
+                resetActiveViews('.admin-content-view');
+                resetActiveButtons('.student-sidebar-button');
+                resetActiveButtons('.teacher-sidebar-button');
+                resetActiveButtons('.admin-sidebar-button');
+                
+                // Activar la vista y el botón por defecto del rol seleccionado
+                if (role === 'estudiante') {
+                    document.getElementById('student-personal-data-view').classList.remove('hidden');
+                    document.querySelector('.student-sidebar-button[data-target="student-personal-data-view"]').classList.add('active-tab');
+                } else if (role === 'docente') {
+                    document.getElementById('teacher-grades-view').classList.remove('hidden');
+                    document.querySelector('.teacher-sidebar-button[data-target="teacher-grades-view"]').classList.add('active-tab');
+                } else if (role === 'administrador') {
+                    document.getElementById('admin-users-view').classList.remove('hidden');
+                    document.querySelector('.admin-sidebar-button[data-target="admin-users-view"]').classList.add('active-tab');
+                }
+            }
+
+            // Lógica de Login
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userType = document.getElementById('loginType').value;
+                let portalId = userType === 'estudiante' ? 'student-portal-tab' :
+                               userType === 'docente' ? 'teacher-portal-tab' :
+                               'admin-portal-tab'; 
+                
+                userIdDisplay.textContent = `${document.getElementById('loginEmail').value} (${userType})`;
+                
+                showView(portalId, userType);
+            });
+
+
+            // Lógica para la navegación del menú lateral (Sidebar)
+            const setupSidebarNavigation = (buttonSelector, viewSelector) => {
+                document.querySelectorAll(buttonSelector).forEach(button => {
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll(buttonSelector).forEach(btn => btn.classList.remove('active-tab'));
+                        document.querySelectorAll(viewSelector).forEach(view => view.classList.add('hidden'));
+
+                        button.classList.add('active-tab');
+                        document.getElementById(button.dataset.target).classList.remove('hidden');
+                    });
+                });
+            };
+
+            // Setup para los 3 roles
+            setupSidebarNavigation('.student-sidebar-button', '.student-content-view');
+            setupSidebarNavigation('.teacher-sidebar-button', '.teacher-content-view');
+            setupSidebarNavigation('.admin-sidebar-button', '.admin-content-view');
+
+            // --- EVENTOS DE GUARDADO CON NOTIFICACIÓN ---
+
+            // 1. Estudiante: Guardar Datos Personales
+            studentSaveBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Aquí iría la lógica REAL de Supabase para guardar los datos.
+                showNotification('Datos Personales guardados con éxito.');
+            });
+
+            // 2. Docente: Guardar Nota
+            teacherSaveBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Aquí iría la lógica REAL de Supabase para guardar la nota.
+                showNotification('Nota cargada con éxito.');
+            });
+
+            // 3. Administrador: Registrar Usuario
+            adminSaveBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Aquí iría la lógica REAL de Supabase para registrar el usuario.
+                showNotification('Usuario registrado con éxito.');
+            });
+
+            // --- Lógica del Modal (Mantenido) ---
+            const modal = document.getElementById('modal');
+            const modalCancelBtn = document.getElementById('modalCancelBtn');
+            
+            function hideModal() {
+                modal.style.display = 'none';
+            }
+            modalCancelBtn.onclick = hideModal;
+
+            // Iniciar mostrando la vista de Login
+            showView('login-tab', null);
+        });
+    </script>
+
+    <div id="login-tab" class="tab-content flex justify-center items-center h-screen-minus-padding">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">
+                <i class="fas fa-university mr-2 text-blue-800"></i>Acceso al Sistema
+            </h2>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="loginEmail" placeholder="ejemplo@academico.com" value="jose@snm.bo" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="loginPassword" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <input type="password" id="loginPassword" placeholder="********" value="123456" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="loginType" class="block text-sm font-medium text-gray-700">Tipo de Usuario (Demo)</label>
+                    <select id="loginType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <option value="estudiante">Estudiante</option>
+                        <option value="docente">Docente</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+                <button type="submit" class="action-btn bg-blue-700 text-white font-bold py-3 w-full rounded-lg hover:bg-blue-800 transition-colors">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <div class="max-w-7xl mx-auto bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+            
+            <div class="p-4 bg-white border-b border-gray-200">
+                <p class="text-center text-lg text-gray-600 font-semibold">Usuario: <span id="userIdDisplay" class="font-mono text-gray-800"></span></p>
+            </div>
+            
+            <div id="student-portal-tab" class="tab-content hidden">
+                <div class="student-header p-5 shadow-lg">
+                    <h2 class="text-3xl font-bold text-center">PORTAL ESTUDIANTIL</h2>
+                    <p class="text-center text-sm">Mi Expediente Académico</p>
+                </div>
+
+                <div class="flex bg-white min-h-[700px]">
+                    <div class="student-sidebar pt-5 space-y-1 flex-shrink-0">
+                        <button class="w-full text-left student-sidebar-button" data-target="student-personal-data-view">
+                            <i class="fas fa-user mr-2"></i>Datos Personales
+                        </button>
+                        <button class="w-full text-left student-sidebar-button" data-target="student-grades-view">
+                            <i class="fas fa-star mr-2"></i>Notas y Calificaciones
+                        </button>
+                        <button class="w-full text-left student-sidebar-button" data-target="student-inscription-view">
+                            <i class="fas fa-book-open mr-2"></i>Inscripción de Materias
+                        </button>
+                        <button class="w-full text-left student-sidebar-button" data-target="student-library-view">
+                            <i class="fas fa-book mr-2"></i>Biblioteca Digital
+                        </button>
+                        <button class="w-full text-left student-sidebar-button" data-target="student-messages-view">
+                            <i class="fas fa-envelope mr-2"></i>Mensajería
+                        </button>
+                    </div>
+
+                    <div class="flex-1 p-8">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-2">Panel de Control Estudiantil</h3>
+                        <p class="text-gray-500 mb-6">Bienvenido/a. Utiliza el menú lateral para acceder a la gestión de tu información académica.</p>
+
+                        <div id="student-personal-data-view" class="student-content-view hidden">
+                            <div class="p-4 rounded-lg border-l-4 border-blue-600 mb-6 bg-gray-100">
+                                <h4 class="text-xl font-medium text-blue-700">
+                                    <i class="fas fa-info-circle mr-2"></i>Mi Información Personal
+                                </h4>
+                            </div>
+                            
+                            <form class="space-y-4 max-w-lg">
+                                <div>
+                                    <label for="fullName" class="block text-sm font-medium text-gray-700">Nombre Completo:</label>
+                                    <input type="text" id="fullName" value="Juan Pérez Gómez" class="w-full p-3 border border-gray-300 rounded-md bg-white" readonly>
+                                </div>
+                                <div>
+                                    <label for="institutionalEmail" class="block text-sm font-medium text-gray-700">Correo Institucional:</label>
+                                    <input type="email" id="institutionalEmail" value="juan.perez@usm.edu" class="w-full p-3 border border-gray-300 rounded-md bg-white" readonly>
+                                </div>
+                                <div>
+                                    <label for="contactPhone" class="block text-sm font-medium text-gray-700">Teléfono de Contacto:</label>
+                                    <input type="text" id="contactPhone" value="777-77777" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <button type="button" id="student-save-btn" class="action-btn bg-blue-600 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">
+                                    Guardar Cambios
+                                </button>
+                            </form>
+                            
+                            <a href="acceder.html" class="mt-8 block text-blue-600 hover:underline">
+                                &leftarrow; Volver a la página principal
+                            </a>
+                        </div>
+                        
+                        <div id="student-grades-view" class="student-content-view hidden">
+                            <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-star mr-2 text-yellow-500"></i>Notas y Calificaciones</h4>
+                            <p>Aquí se mostrarían las calificaciones detalladas.</p>
+                        </div>
+                        <div id="student-inscription-view" class="student-content-view hidden">
+                             <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-book-open mr-2 text-indigo-500"></i>Inscripción de Materias</h4>
+                             <p>Aquí se gestiona la inscripción de materias para el próximo periodo.</p>
+                        </div>
+                        <div id="student-library-view" class="student-content-view hidden">
+                            <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-book mr-2 text-orange-500"></i>Biblioteca Digital</h4>
+                            <p>Acceso a recursos y libros digitales.</p>
+                        </div>
+                        <div id="student-messages-view" class="student-content-view hidden">
+                            <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-envelope mr-2 text-purple-500"></i>Mensajería</h4>
+                            <p>Bandeja de entrada y envío de mensajes institucionales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="teacher-portal-tab" class="tab-content hidden">
+                <div class="student-header p-5 shadow-lg">
+                    <h2 class="text-3xl font-bold text-center">PORTAL DOCENTE</h2>
+                    <p class="text-center text-sm">Cátedras y Gestión</p>
+                </div>
+                
+                <div class="flex bg-white min-h-[700px]">
+                    <div class="teacher-sidebar pt-5 space-y-1 flex-shrink-0">
+                        <button class="w-full text-left teacher-sidebar-button" data-target="teacher-grades-view">
+                            <i class="fas fa-upload mr-2"></i>Cargar Notas
+                        </button>
+                        <button class="w-full text-left teacher-sidebar-button" data-target="teacher-attendance-view">
+                            <i class="fas fa-clipboard-check mr-2"></i>Registrar Asistencia
+                        </button>
+                        <button class="w-full text-left teacher-sidebar-button" data-target="teacher-communication-view">
+                            <i class="fas fa-comments mr-2"></i>Comunicación
+                        </button>
+                        <button class="w-full text-left teacher-sidebar-button" data-target="teacher-courses-view">
+                            <i class="fas fa-book-reader mr-2"></i>Cursos
+                        </button>
+                    </div>
+
+                    <div class="flex-1 p-8">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-2">Panel de Gestión Docente</h3>
+                        <p class="text-gray-500 mb-6">Utilice las herramientas para gestionar sus asignaturas y la interacción con los estudiantes</p>
+
+                        <div id="teacher-grades-view" class="teacher-content-view hidden">
+                            <div class="p-4 rounded-lg border-l-4 border-blue-600 mb-6 bg-gray-100">
+                                <h4 class="text-xl font-medium text-blue-700">
+                                    <i class="fas fa-calculator mr-2"></i>Carga de Calificaciones
+                                </h4>
+                            </div>
+                            
+                            <form class="space-y-4 max-w-xl">
+                                <div>
+                                    <label for="teacherCourse" class="block text-sm font-medium text-gray-700">Materia:</label>
+                                    <select id="teacherCourse" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                        <option>-- Seleccione una Materia --</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="studentId" class="block text-sm font-medium text-gray-700">ID Estudiante:</label>
+                                    <input type="text" id="studentId" placeholder="Ej: 123456" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label for="finalGrade" class="block text-sm font-medium text-gray-700">Nota Final (0-100):</label>
+                                    <input type="number" id="finalGrade" placeholder="" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <button type="button" id="teacher-save-btn" class="action-btn bg-blue-600 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">
+                                    Guardar Nota
+                                </button>
+                            </form>
+                            
+                            <a href="acceder.html" class="mt-8 block text-blue-600 hover:underline">
+                                &leftarrow; Volver a la página principal
+                            </a>
+                        </div>
+                        <div id="teacher-attendance-view" class="teacher-content-view hidden">
+                            <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-clipboard-check mr-2 text-green-500"></i>Registrar Asistencia</h4>
+                            <p>Formulario para pasar lista a los estudiantes.</p>
+                        </div>
+                        <div id="teacher-communication-view" class="teacher-content-view hidden">
+                             <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-comments mr-2 text-indigo-500"></i>Comunicación</h4>
+                             <p>Envío de comunicados y mensajes a los cursos asignados.</p>
+                        </div>
+                        <div id="teacher-courses-view" class="teacher-content-view hidden">
+                             <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-book-reader mr-2 text-orange-500"></i>Cursos</h4>
+                             <p>Visualización de la lista de cursos a cargo del docente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="admin-portal-tab" class="tab-content hidden">
+                <div class="student-header p-5 shadow-lg">
+                    <h2 class="text-3xl font-bold text-center">GESTIÓN UNIVERSITARIA</h2>
+                    <p class="text-center text-sm">Intranet Administrativa</p>
+                </div>
+
+                <div class="flex bg-white min-h-[700px]">
+                    <div class="admin-sidebar pt-5 space-y-1 flex-shrink-0">
+                        <button class="w-full text-left admin-sidebar-button" data-target="admin-users-view">
+                            <i class="fas fa-users-cog mr-2"></i>Matriz de Usuarios
+                        </button>
+                        <button class="w-full text-left admin-sidebar-button" data-target="admin-payments-view">
+                            <i class="fas fa-cash-register mr-2"></i>Tesorería y Pagos
+                        </button>
+                        <button class="w-full text-left admin-sidebar-button" data-target="admin-reports-view">
+                            <i class="fas fa-chart-line mr-2"></i>Reportes Generales
+                        </button>
+                    </div>
+
+                    <div class="flex-1 p-8">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-2">Panel de Administración Central</h3>
+                        <p class="text-gray-500 mb-6">Gestión de personal, finanzas y reportes institucionales.</p>
+
+                        <div id="admin-users-view" class="admin-content-view hidden">
+                            <div class="p-4 rounded-lg border-l-4 border-blue-600 mb-6 bg-gray-100">
+                                <h4 class="text-xl font-medium text-blue-700">
+                                    <i class="fas fa-user-plus mr-2"></i>Crear Nuevo Usuario
+                                </h4>
+                            </div>
+                            
+                            <form class="space-y-4 max-w-xl">
+                                <div>
+                                    <label for="newUserName" class="block text-sm font-medium text-gray-700">Nombre Completo:</label>
+                                    <input type="text" id="newUserName" placeholder="" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label for="newUserRole" class="block text-sm font-medium text-gray-700">Rol/Tipo de Acceso:</label>
+                                    <select id="newUserRole" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                        <option>-- Seleccione un Rol --</option>
+                                        <option>Estudiante</option>
+                                        <option>Docente</option>
+                                        <option>Administrador</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="newUserEmail" class="block text-sm font-medium text-gray-700">Correo Principal:</label>
+                                    <input type="email" id="newUserEmail" placeholder="" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <button type="button" id="admin-save-btn" class="action-btn bg-blue-600 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">
+                                    Registrar Usuario
+                                </button>
+                            </form>
+                            
+                            <a href="acceder.html" class="mt-8 block text-blue-600 hover:underline">
+                                &leftarrow; Volver a la página principal
+                            </a>
+                        </div>
+                        <div id="admin-payments-view" class="admin-content-view hidden">
+                             <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-cash-register mr-2 text-green-500"></i>Tesorería y Pagos</h4>
+                             <p>Módulo de gestión de cobros, recibos y tesorería.</p>
+                        </div>
+                        <div id="admin-reports-view" class="admin-content-view hidden">
+                             <h4 class="text-xl font-medium text-gray-700 mb-4"><i class="fas fa-chart-line mr-2 text-red-500"></i>Reportes Generales</h4>
+                             <p>Visualización de reportes e indicadores institucionales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-sm text-center">
+            <div class="mb-4 text-blue-500 text-3xl">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3 id="modalTitle" class="text-lg font-bold mb-4">Título del Modal</h3>
+            <p id="modalMessage" class="text-gray-700 mb-4 hidden"></p>
+            <input type="text" id="modalInput1" class="w-full p-3 mb-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input type="text" id="modalInput2" class="w-full p-3 mb-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input type="text" id="modalInput3" class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <div class="flex justify-center space-x-4 mt-4">
+                <button id="modalConfirmBtn" class="action-btn bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-check mr-1"></i>Confirmar
+                </button>
+                <button id="modalCancelBtn" class="action-btn bg-gray-400 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-500 transition-colors">
+                    <i class="fas fa-times mr-1"></i>Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-toast" class="toast hidden">
+        <i class="fas fa-check-circle mr-2"></i> Cambios guardados con éxito.
+    </div>
+
+</body>
+</html>

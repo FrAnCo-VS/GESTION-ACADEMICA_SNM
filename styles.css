@@ -1,0 +1,2146 @@
+/* Variables CSS para consistencia de color */
+:root {
+    --color-primary: #003366; /* Azul Oscuro, como el logo de la Universidad */
+    --color-secondary: #ffc107; /* Amarillo/Dorado, para acentos y llamadas a la acción */
+    --color-background-light: #f4f7f6; /* Gris muy claro para secciones */
+    --color-text-dark: #333333;
+    --color-text-light: #ffffff;
+    --font-family: 'Inter', sans-serif;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    background-color: white; /* Fondo blanco principal */
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin: 60px 0 40px 0;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* ---------------------------------- */
+/* NAVEGACIÓN (NAVBAR) */
+/* ---------------------------------- */
+.navbar {
+    background-color: var(--color-primary);
+    padding: 15px 20px; /* Añadir padding lateral */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; /* Flexbox para alinear lista y botón */
+    justify-content: space-between; /* Espaciar lista y botón */
+    align-items: center;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start; /* Alinear lista a la izquierda */
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    position: relative;
+    padding: 0 15px;
+}
+
+.nav-item a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 0;
+    display: block;
+    transition: color 0.3s;
+}
+
+.nav-item a:hover {
+    color: var(--color-secondary);
+}
+
+/* Dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #002244; /* Un azul más oscuro */
+    min-width: 220px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 10;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.dropdown-content a {
+    color: var(--color-text-light);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: 400;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+.nav-item.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* BOTÓN ACCEDER (Estilo solicitado) */
+.btn-acceder {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.btn-acceder:hover {
+    background-color: #ffd740; /* Tono más claro de amarillo */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ---------------------------------- */
+/* BOTONES Y ACCIONES */
+/* ---------------------------------- */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary-alt {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    box-shadow: 0 4px 0 var(--color-primary);
+}
+
+.btn-primary-alt:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--color-primary);
+}
+
+.btn-secondary-alt {
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+}
+
+.btn-secondary-alt:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+/* ---------------------------------- */
+/* FOOTER */
+/* ---------------------------------- */
+.main-footer {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 40px 20px 10px;
+    margin-top: 50px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #1a4d80;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--color-secondary);
+    padding-left: 10px;
+}
+
+.footer-section p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.footer-section i {
+    color: var(--color-secondary);
+    margin-right: 8px;
+}
+
+.socials a {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 15px;
+    transition: transform 0.2s;
+}
+
+.socials img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.socials a:hover {
+    transform: scale(1.1);
+}
+
+.map-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: var(--shadow-light);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------------------------------- */
+/* MEDIA QUERIES (Responsividad) */
+/* ---------------------------------- */
+@media (max-width: 900px) {
+    /* En pantallas medianas y pequeñas, movemos el botón Acceder al inicio de la navegación */
+    .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-list {
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        order: 2; /* Mueve la lista debajo del botón */
+    }
+    
+    .btn-acceder {
+        width: 100%; /* El botón ocupa todo el ancho */
+        text-align: center;
+        margin-bottom: 15px; /* Espacio debajo del botón */
+        padding: 10px;
+        order: 1; /* Mueve el botón al inicio */
+    }
+
+    .nav-item {
+        padding: 5px 10px;
+    }
+    .dropdown-content {
+        min-width: 100%;
+        left: 0;
+        text-align: center;
+    }
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-section {
+        min-width: 100%;
+        margin-bottom: 20px;
+    }
+    .footer-section h3 {
+        border-left: none;
+        padding-left: 0;
+        border-bottom: 2px solid var(--color-secondary);
+        padding-bottom: 5px;
+    }
+    .map-image {
+        max-width: 100%;
+    }
+    
+    /* Adaptaciones del Hero Section */
+    .hero-overlay h1 {
+        font-size: 2.5rem;
+    }
+    .hero-overlay p {
+        font-size: 1.2rem;
+    }
+    .stats-container {
+        justify-content: center;
+    }
+    .stat-item {
+        flex-basis: 40%;
+    }
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS: PÁGINA PRINCIPAL (index.html)                 */
+/* ================================================================= */
+
+/* --- HERO SECTION --- */
+.hero-section {
+    position: relative;
+    height: 70vh; /* Altura de la vista */
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 40px;
+}
+
+.hero-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.3);
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    color: var(--color-text-light);
+    padding: 20px;
+    max-width: 800px;
+}
+
+.hero-overlay h1 {
+    font-size: 3.8rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    font-weight: 900;
+}
+
+.hero-overlay p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* --- FEATURE CARDS (Nuestros Pilares) --- */
+.features-section {
+    background-color: var(--color-background-light);
+    padding: 60px 20px;
+    border-radius: 12px;
+}
+
+.feature-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+/* --- CAREER HIGHLIGHTS --- */
+.career-highlight-section {
+    padding: 40px 0;
+}
+
+.career-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.career-highlight-card {
+    display: block; /* Para que el enlace ocupe todo el espacio de la tarjeta */
+    text-decoration: none;
+    padding: 30px;
+    border-radius: 12px;
+    transition: all 0.3s;
+    background-color: white;
+    box-shadow: var(--shadow-light);
+    color: var(--color-text-dark);
+}
+
+.career-highlight-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.career-highlight-card .icon-wrap {
+    display: inline-block;
+    font-size: 2rem;
+    padding: 15px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    color: var(--color-text-light);
+}
+
+/* Estilos de color por carrera */
+.career-highlight-card.systems .icon-wrap { background-color: #1e88e5; }
+.career-highlight-card.business .icon-wrap { background-color: #43a047; }
+.career-highlight-card.health .icon-wrap { background-color: #e53935; }
+
+.career-highlight-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+}
+
+.career-highlight-card p {
+    margin-bottom: 20px;
+}
+
+.career-highlight-card .view-more {
+    font-weight: 700;
+    color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+}
+
+.career-highlight-card .view-more i {
+    margin-left: 8px;
+    transition: margin-left 0.3s;
+}
+
+.career-highlight-card:hover .view-more i {
+    margin-left: 15px;
+}
+
+
+/* --- STATS SECTION (Cifras) --- */
+.stats-section {
+    padding: 60px 20px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.stats-section .section-title {
+    color: var(--color-secondary);
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-item {
+    text-align: center;
+    flex-basis: 200px;
+}
+
+.stat-item i {
+    font-size: 3.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 10px;
+}
+
+.stat-item .number {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.stat-item .label {
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* ------------------------------------------------------------------ */
+/* Estilos para facultad.html (copiados y adaptados del paso anterior) */
+/* ------------------------------------------------------------------ */
+
+/* Navegación Interna (Solo en facultad.html) */
+.internal-nav {
+    text-align: center;
+    margin: 20px 0 40px 0;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+.internal-nav button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.internal-nav button:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.faculty-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.question-title {
+    color: var(--color-text-dark);
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 40px 0 25px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- BANNER DE CARRERA --- */
+.career-banner {
+    position: relative;
+    width: 100%;
+    height: 300px; 
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.career-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4); 
+}
+
+.banner-title-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 51, 102, 0.5); 
+}
+
+.banner-title-overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    font-weight: 900;
+    color: white; 
+}
+
+.banner-title-overlay p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* --- TARJETA DE CARRERA (Doble Columna) --- */
+.career-card {
+    display: flex;
+    flex-direction: column; 
+    gap: 30px;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.career-info, .desglose-plan {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+@media (min-width: 900px) {
+    .career-card {
+        flex-direction: row; 
+        align-items: flex-start;
+    }
+    .career-info {
+        flex: 3; 
+    }
+    .desglose-plan {
+        flex: 2; 
+        position: sticky;
+        top: 20px;
+    }
+}
+
+.card-subtitle {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+.profile-section, .study-plan {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+.why-study ul, .profile-section ul, .study-plan ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-study ul li, .profile-section ul li, .study-plan ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+}
+
+.why-study ul li i, .profile-section ul li i, .study-plan ul li i {
+    color: var(--color-secondary);
+    margin-right: 8px;
+}
+
+/* --- DESGLOSE PLAN / GRÁFICOS DE BARRA --- */
+.bar-charts {
+    margin: 20px 0;
+}
+
+.bar-item {
+    margin-bottom: 15px;
+}
+
+.bar-item span {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+}
+
+.bar {
+    background-color: #eee;
+    border-radius: 10px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    color: white;
+    text-align: right;
+    padding-right: 8px;
+    line-height: 20px;
+    font-weight: bold;
+    border-radius: 10px 0 0 10px;
+    transition: width 1s ease-out;
+}
+
+/* Colores para las barras (Ingeniería de Sistemas) */
+.bar-fill.sistemas { background-color: #007bff; }
+.bar-fill.matematica { background-color: #28a745; }
+.bar-fill.electronica { background-color: #ffc107; color: #333;}
+.bar-fill.lenguaje { background-color: #fd7e14; }
+.bar-fill.investigacion { background-color: #6f42c1; }
+.bar-fill.otros { background-color: #17a2b8; }
+
+/* Lista de porcentajes simple (Empresariales y Salud) */
+.simple-list-percentage {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.simple-list-percentage li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+    font-weight: 500;
+}
+
+.simple-list-percentage li i {
+    color: var(--color-primary);
+    margin-right: 5px;
+}
+
+.simple-list-percentage li span {
+    font-weight: 700;
+    color: var(--color-secondary);
+}
+
+/* ================================================================= */
+/* ESTILOS GLOBALES / BASE                                           */
+/* ================================================================= */
+
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Variables de Color */
+:root {
+    --color-primary: #003366; /* Azul Oscuro USM */
+    --color-secondary: #ffd700; /* Dorado USM */
+    --color-text-light: #ffffff;
+    --color-card-student: #2196F3; /* Azul para Estudiante */
+    --color-card-teacher: #4CAF50; /* Verde para Docente */
+    --color-card-admin: #FF9800; /* Naranja para Administrador */
+}
+
+/* ================================================================= */
+/* BARRA DE MENÚ (NAVBAR) - Con Subrayado Dorado                     */
+/* ================================================================= */
+
+.navbar {
+    background-color: #003366; 
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 15px;
+    display: block;
+    font-size: 14px; 
+    font-weight: 500;
+    transition: background-color 0.3s, border-bottom 0.3s;
+    border-bottom: 3px solid transparent; 
+}
+
+.nav-item a:hover,
+.nav-item a.active {
+    background-color: #004080;
+    border-bottom: 3px solid #ffd700; /* Subrayado dorado */
+}
+
+/* Submenús Desplegables */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+    z-index: 20; 
+    top: 100%; 
+    left: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; 
+}
+
+.dropdown-content a {
+    color: #003366;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: none; 
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #004080;
+}
+
+/* ================================================================= */
+/* CARRUSEL (SLIDER) - CORRECCIÓN FINAL (ESPACIO, PUNTOS, FLECHAS)   */
+/* ================================================================= */
+
+.slider-container {
+    /* Altura ajustada y margen inferior eliminado */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0; /* CORRECCIÓN: Elimina el espacio bajo la imagen */
+}
+
+.mySlides {
+    display: none;
+    animation-name: fade;
+    animation-duration: 1.5s;
+    width: 100%;
+    height: 400px; /* Altura fija para controlar la dimensión del carrusel */
+}
+
+.mySlides img {
+    /* Asegura que la imagen cubra completamente el área del slide */
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; 
+}
+
+/* ❌ CORRECCIÓN: OCULTA LAS FLECHAS DE NAVEGACIÓN */
+.prev, .next {
+    display: none !important;
+}
+
+.text {
+    color: #ffffff;
+    font-size: 2.5vw; 
+    line-height: 1.2;
+    padding: 20px;
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 80%;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+}
+
+/* ❌ CORRECCIÓN: OCULTA LOS PUNTOS DE NAVEGACIÓN */
+.dot {
+    display: none;
+}
+
+.active, .dot:hover {
+    background-color: #003366; 
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+/* ================================================================= */
+/* BARRA INFERIOR DE INFO                                            */
+/* ================================================================= */
+
+.info-bar {
+    background-color: #003366;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.info-bar p {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.info-bar img {
+    height: 25px; 
+    margin-right: 10px;
+}
+
+.logo-text h1 {
+    font-size: 40px;
+    margin: 0;
+    line-height: 1;
+}
+
+.logo-text p {
+    font-size: 16px;
+    margin: 0;
+    font-weight: normal;
+}
+
+/* ========================================================== */
+/* ================ SECCIÓN DE ACCESOS POR ROL ============== */
+/* ========================================================== */
+.access-roles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.role-card {
+    padding: 25px;
+    border-radius: 8px;
+    color: var(--color-text-light); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.role-card:hover {
+    transform: translateY(-5px); 
+}
+
+.student-card { background-color: var(--color-card-student); }
+.teacher-card { background-color: var(--color-card-teacher); }
+.admin-card { background-color: var(--color-card-admin); }
+
+.role-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.role-card ul {
+    list-style: disc; 
+    margin-bottom: 20px;
+    line-height: 1.6;
+    padding-left: 20px;
+    font-size: 0.95rem;
+    flex-grow: 1; 
+}
+
+.btn-role {
+    display: block; 
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-primary);
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: auto; 
+}
+
+.btn-role:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+}
+
+
+/* ================================================================= */
+/* FOOTER: ESTILOS BASE Y GENERALES                                  */
+/* ================================================================= */
+
+.main-footer {
+    background-color: #1a1a1a; /* Fondo oscuro casi negro */
+    color: #cccccc;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1; 
+    min-width: 280px; 
+    margin: 10px;
+}
+
+.footer-section h3 {
+    color: #ffd700; /* Títulos dorados, consistente con el menú */
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-section p, 
+.footer-section address,
+.footer-section ul li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cccccc;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS: UBICACIÓN (.location)                        */
+/* ================================================================= */
+
+.footer-section.location address {
+    margin-top: 15px; 
+    line-height: 1.5;
+}
+
+.map-image {
+    width: 150px; 
+    height: auto;
+    max-height: 150px; 
+    object-fit: cover; 
+    border: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS: CONTACTO (.contact)                          */
+/* ================================================================= */
+
+.footer-section.contact p {
+    /* Asegura que el texto de contacto se vea limpio */
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+/* Estilos de Contacto y Redes Sociales (iconos) */
+.socials {
+    margin-top: 20px; 
+}
+
+.socials a img {
+    width: 70px; 
+    height: 70px;
+    margin-right: 10px;
+    transition: opacity 0.3s;
+}
+
+.socials a img:hover {
+    opacity: 0.8;
+}
+
+/* ================================================================= */
+/* FOOTER BOTTOM (Copyright)                                         */
+/* ================================================================= */
+
+.footer-bottom {
+    background-color: #000000; 
+    color: #999999;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 13px;
+    border-top: 1px solid #333333;
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS DE PÁGINA: INSTITUCIONAL (uni.html)           */
+/* ================================================================= */
+
+/* Reutiliza .main-content y h2 definidos previamente */
+
+/* Subtítulos de la sección Visión/Misión */
+.section-subtitle { 
+    color: var(--color-primary); 
+    margin-top: 15px; 
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* -------------------------------------- */
+/* Estilos para Historia (Timeline) */
+/* -------------------------------------- */
+.timeline { 
+    list-style: none; 
+    padding: 0; 
+    margin-top: 20px;
+}
+
+.timeline li { 
+    border-left: 3px solid var(--color-primary); 
+    padding-left: 20px; 
+    padding-bottom: 20px; /* Espacio entre eventos */
+    margin-bottom: 0; 
+    position: relative; 
+}
+
+/* Punto de color en la línea de tiempo */
+.timeline li::before { 
+    content: ''; /* Se reemplaza el '•' por un círculo mejor */
+    position: absolute; 
+    left: -8px; /* Ajustar posición */
+    top: 0; 
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-secondary); /* Dorado */
+    border: 3px solid white; /* Círculo con borde blanco para resaltar */
+    z-index: 1;
+}
+
+.timeline li h3 {
+    color: var(--color-primary);
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* -------------------------------------- */
+/* Estilos para Normativa (Document List) */
+/* -------------------------------------- */
+.document-list { 
+    list-style: none; 
+    padding: 0; 
+    margin-top: 20px;
+}
+
+.document-list li { 
+    margin-bottom: 15px; 
+}
+
+.document-list a { 
+    display: flex; /* Para alinear el ícono */
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px; 
+    background-color: #f4f4f4; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    text-decoration: none; 
+    color: var(--color-primary); 
+    transition: background-color 0.3s, border-color 0.3s; 
+    font-weight: 500;
+}
+
+.document-list a:hover { 
+    background-color: #e0e0e0; 
+    border-color: var(--color-secondary);
+}
+
+.document-list a .fas {
+    color: #cc0000; /* Color rojo típico para PDF */
+    font-size: 1.1rem;
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS DE PÁGINA: FACULTADES (facultad.html)         */
+/* ================================================================= */
+
+.faculty-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.question-title {
+    color: var(--color-text-dark);
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 40px 0 25px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- BANNER DE CARRERA --- */
+.career-banner {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Altura fija para el banner */
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.career-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4); /* Oscurece la imagen para que el texto resalte */
+}
+
+.banner-title-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 51, 102, 0.5); /* Overlay azul semi-transparente */
+}
+
+.banner-title-overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    font-weight: 900;
+    color: white; /* Sobrescribe el color primary */
+}
+
+.banner-title-overlay p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* --- TARJETA DE CARRERA (Doble Columna) --- */
+.career-card {
+    display: flex;
+    flex-direction: column; /* Por defecto, en columna para móvil */
+    gap: 30px;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.career-info, .desglose-plan {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+@media (min-width: 900px) {
+    .career-card {
+        flex-direction: row; /* Diseño de dos columnas en escritorio */
+        align-items: flex-start;
+    }
+    .career-info {
+        flex: 3; /* Más ancho para la descripción */
+    }
+    .desglose-plan {
+        flex: 2; /* Menos ancho para los gráficos/detalles */
+        position: sticky;
+        top: 20px;
+    }
+}
+
+.card-subtitle {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+.profile-section, .study-plan {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+.why-study ul, .profile-section ul, .study-plan ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-study ul li, .profile-section ul li, .study-plan ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+}
+
+.why-study ul li i, .profile-section ul li i, .study-plan ul li i {
+    color: var(--color-secondary);
+    margin-right: 8px;
+}
+
+/* --- DESGLOSE PLAN / GRÁFICOS DE BARRA --- */
+.bar-charts {
+    margin: 20px 0;
+}
+
+.bar-item {
+    margin-bottom: 15px;
+}
+
+.bar-item span {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+}
+
+.bar {
+    background-color: #eee;
+    border-radius: 10px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    color: white;
+    text-align: right;
+    padding-right: 8px;
+    line-height: 20px;
+    font-weight: bold;
+    border-radius: 10px 0 0 10px;
+    transition: width 1s ease-out;
+}
+
+/* Colores para las barras (Ingeniería de Sistemas) */
+.bar-fill.sistemas { background-color: #007bff; }
+.bar-fill.matematica { background-color: #28a745; }
+.bar-fill.electronica { background-color: #ffc107; color: #333;}
+.bar-fill.lenguaje { background-color: #fd7e14; }
+.bar-fill.investigacion { background-color: #6f42c1; }
+.bar-fill.otros { background-color: #17a2b8; }
+
+/* Lista de porcentajes simple (Empresariales y Salud) */
+.simple-list-percentage {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.simple-list-percentage li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+    font-weight: 500;
+}
+
+.simple-list-percentage li i {
+    color: var(--color-primary);
+    margin-right: 5px;
+}
+
+.simple-list-percentage li span {
+    font-weight: 700;
+    color: var(--color-secondary);
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS DE PÁGINAS INTERNAS (Ej: Admisiones, Uni)      */
+/* ================================================================= */
+
+.main-content { 
+    padding: 50px 20px; 
+    min-height: 500px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.main-content h2 { 
+    color: var(--color-primary); 
+    border-bottom: 2px solid var(--color-secondary); 
+    padding-bottom: 10px; 
+    margin-bottom: 30px; 
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Contenedor principal de la sección (Inscripciones / Reincorporaciones) */
+.section-box { 
+    padding: 30px; 
+    margin-bottom: 40px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    border-top: 5px solid var(--color-secondary); 
+}
+
+.section-box h3 { 
+    color: var(--color-primary); 
+    margin-top: 0; 
+    font-size: 20px; 
+    margin-bottom: 15px; 
+    font-weight: 600;
+}
+
+/* Estilos para el Menú de Anclas Internas */
+.internal-nav { 
+    text-align: center; 
+    margin-bottom: 40px; 
+}
+
+.internal-nav a {
+    text-decoration: none;
+}
+
+.internal-nav button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    margin: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.internal-nav button:hover {
+    background-color: #004080;
+    transform: translateY(-2px);
+}
+
+/* Estilos de la lista de pasos (Inscripción) */
+.steps { 
+    counter-reset: step; 
+    list-style: none; 
+    padding: 0; 
+}
+
+.steps li { 
+    margin-bottom: 15px; 
+    position: relative; 
+    padding-left: 35px; /* Deja espacio para el número */
+    line-height: 1.5;
+}
+
+.steps li::before { 
+    counter-increment: step; 
+    content: counter(step); 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    background-color: var(--color-secondary); 
+    color: var(--color-primary); 
+    width: 25px; 
+    height: 25px; 
+    border-radius: 50%; 
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 16px; 
+    line-height: 25px; /* Centrar el número verticalmente */
+}
+
+/* Estilos para la nota (Reincorporaciones) */
+.note { 
+    background-color: #fff8e1; /* Amarillo muy claro */
+    border-left: 5px solid var(--color-secondary); 
+    padding: 15px; 
+    margin-top: 20px; 
+    color: #333; 
+    border-radius: 0 4px 4px 0;
+}
+
+.note strong {
+    color: var(--color-primary);
+}
+
+/* Estilos para la lista simple (Requisitos) */
+.requirements {
+    list-style: disc;
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS DE PÁGINA: DOCENCIA                           */
+/* ================================================================= */
+
+/* Reutiliza .main-content y h2 definidos previamente */
+
+.criteria-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 25px; /* Aumenté el gap para mejor separación */
+    margin-bottom: 30px;
+}
+
+.criteria-grid div { 
+    flex: 1; 
+    min-width: 280px; /* Asegura que no se hagan demasiado pequeños */
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    background-color: #fcfcfc; 
+    transition: box-shadow 0.3s;
+}
+
+.criteria-grid div:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.criteria-grid h4 { 
+    color: var(--color-primary); 
+    margin-top: 0; 
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.criteria-grid h4 i {
+    color: var(--color-secondary); /* Iconos dorados */
+    font-size: 1.4rem;
+}
+
+.portal-link {
+    margin-top: 20px; 
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* ================================================================= */
+/* ESTILOS ESPECÍFICOS DE PÁGINA: CONTACTO                           */
+/* ================================================================= */
+
+/* Reutilizamos el estilo principal de contenido de otras páginas */
+.main-content { 
+    padding: 50px 20px; 
+    min-height: 500px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.main-content h2 { 
+    color: var(--color-primary); 
+    border-bottom: 2px solid var(--color-secondary); 
+    padding-bottom: 10px; 
+    margin-bottom: 30px; 
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-form {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.contact-form label { 
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    color: #333; 
+}
+
+.contact-form input[type="text"], 
+.contact-form input[type="email"],
+.contact-form textarea { 
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; /* Asegura que padding no afecte el width total */
+    font-size: 16px;
+}
+
+.contact-form textarea { 
+    resize: vertical; 
+    min-height: 150px; 
+}
+
+.contact-form button { 
+    background-color: var(--color-primary); 
+    color: white; 
+    padding: 12px 20px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    font-weight: bold;
+    transition: background-color 0.3s; 
+}
+
+.contact-form button:hover { 
+    background-color: #004080; 
+} .phone-contact {
+    margin-top: 30px; 
+    font-size: 1.1rem;
+    padding: 15px;
+    border-left: 5px solid var(--color-secondary);
+    background-color: #f1f1f1;
+} 
+
+
+/* --- VARIABLES Y RESETEO BÁSICO --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #003366; /* Azul Oscuro - Naval */
+    --secondary-color: #fdd835; /* Amarillo - Énfasis */
+    --accent-color: #03a9f4; /* Azul Claro */
+    --text-color: #333;
+    --light-bg: #f5f5f5;
+    --error-color: #e53935; /* Rojo para errores */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+/* --- CONTENEDOR PRINCIPAL (Para cambiar entre vistas) --- */
+.page-content {
+    display: block; 
+}
+.portal-view {
+    display: none; 
+}
+
+/* ------------------------------------------- */
+/* --- ESTILOS DE LA PÁGINA PRINCIPAL (Index) --- */
+/* ------------------------------------------- */
+
+/* BARRA DE NAVEGACIÓN SUPERIOR */
+.top-bar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 5%;
+}
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.navbar a {
+    color: white;
+    padding: 15px 20px;
+    display: block;
+    font-weight: 400;
+    transition: background-color 0.3s;
+}
+.navbar li:hover > a {
+    background-color: #004488;
+}
+
+/* HEADER / BANNER PRINCIPAL */
+.header-banner {
+    /* Imagen replicada del diseño original */
+    background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRXlnw-hl7jHHWMc13vCaX_weZl-azue5jmVWakLZ2CgF5DBHxd');
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    position: relative;
+}
+.overlay-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 51, 102, 0.6), rgba(0, 51, 102, 0.8));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1000px;
+}
+.icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.icon {
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 35px;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    box-shadow: 0 0 15px rgba(3, 169, 244, 0.7);
+}
+.icon-wrapper:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 250px;
+    background-color: var(--accent-color);
+    margin-left: 170px;
+    margin-top: -85px;
+    z-index: -1;
+}
+
+/* SECCIÓN DE BIENVENIDA Y TÍTULO */
+.welcome-section {
+    background-color: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid var(--secondary-color);
+}
+.welcome-section h2 {
+    margin: 0;
+    font-size: 2.5em;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.san-martin-tag {
+    text-align: right;
+}
+.san-martin-tag h3 {
+    margin: 0;
+    font-size: 2.2em;
+    color: var(--accent-color);
+    font-weight: 700;
+}
+.san-martin-tag p {
+    margin: 0;
+    font-size: 1em;
+    color: var(--primary-color);
+    font-style: italic;
+}
+
+/* CONTENEDOR DE PANELES (SERVICIOS) */
+.services-container {
+    padding: 40px 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 COLUMNAS para incluir el login */
+    gap: 30px;
+}
+.service-panel {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    border-top: 5px solid var(--primary-color);
+}
+.service-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+.panel-header {
+    background-color: var(--light-bg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+}
+.panel-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-left: 10px;
+}
+.panel-content {
+    padding: 15px 20px;
+}
+.panel-content ul {
+    list-style: none;
+    padding: 0;
+}
+.panel-content ul li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.95em;
+}
+.panel-link {
+    cursor: pointer; 
+    display: block;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    border-top: 1px solid #ddd;
+}
+.panel-link:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+/* --- ESTILOS ESPECÍFICOS DEL PANEL DE LOGIN --- */
+.login-panel-content {
+    padding: 20px;
+}
+.login-panel-content .form-group {
+    margin-bottom: 15px;
+}
+.login-panel-content label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+.login-panel-content input[type="text"], 
+.login-panel-content input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.login-panel-content .btn-submit {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.login-panel-content .btn-submit:hover {
+    background-color: #004488;
+}
+.login-panel-content .form-footer a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--accent-color);
+    font-size: 0.9em;
+}
+.login-error {
+    color: var(--error-color);
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+    display: none; /* Se muestra con JS */
+    font-weight: bold;
+}
+/* ---------------------------------------------------- */
+
+
+/* FOOTER / PIE DE PÁGINA */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+.footer-section h4 {
+    color: var(--secondary-color);
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--accent-color);
+    font-weight: 700;
+}
+.social-icons a {
+    margin-right: 15px;
+    font-size: 1.5em;
+    color: white;
+}
+.map-placeholder {
+    background-color: #555;
+    height: 120px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+/* ------------------------------------------ */
+/* --- ESTILOS DE LOS PANELES INTERNOS (Portal) --- */
+/* ------------------------------------------ */
+.portal-view {
+    min-height: 80vh;
+    padding: 0;
+}
+.portal-header-view {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 30px 5%;
+    text-align: center;
+}
+.portal-header-view h1 {
+    margin: 0;
+    font-size: 2.5em;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+.portal-container {
+    display: flex;
+    padding: 40px 5%;
+    gap: 30px;
+    align-items: flex-start;
+}
+.sidebar {
+    width: 250px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 5px;
+    background-color: var(--light-bg);
+    border-radius: 4px;
+    color: var(--primary-color);
+    font-weight: 700;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+.sidebar ul li a i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+.sidebar ul li a:hover {
+    background-color: #ddd;
+}
+.sidebar ul li a.active {
+    background-color: var(--accent-color);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-panel-content {
+    flex-grow: 1;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid var(--accent-color);
+}
+.subpanel-content {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    display: none; 
+}
+.subpanel-content h3 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+.back-link {
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+/* --- ESTILOS DE FORMULARIO GENERAL (usado en portales internos) --- */
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+.form-group input[type="text"], 
+.form-group input[type="number"], 
+.form-group select, 
+.form-group textarea,
+.form-group input[type="date"] {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.btn-submit {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.btn-submit:hover {
+    background-color: #008cba;
+}
+
+
+/*
+ * Archivo: styles.css
+ * Descripción: Estilos personalizados para el Sistema de Gestión Académica (adaptado a la nueva estructura de portales).
+ */
+
+/* ESTILOS GLOBALES Y TIPOGRAFÍA */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6; /* Fondo gris muy claro para el cuerpo */
+    color: #1f2937; /* Color de texto base (gris oscuro) */
+}
+
+/* ESTILOS DE COMPONENTES DE INTERFAZ */
+
+/* Estilo del modal */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: none; 
+    justify-content: center; 
+    align-items: center;
+}
+
+/* ESTILOS DE LOS PORTALES (Color institucional: Azul oscuro) */
+
+/* Estilo del encabezado superior (usado en los 3 portales: Estudiantil, Docente, Admin) */
+.student-header {
+    background-color: #172D62; /* Azul oscuro */
+    color: white;
+}
+
+/* Estilo base del sidebar (usado en los 3 portales) */
+.student-sidebar, .teacher-sidebar, .admin-sidebar {
+    width: 250px; 
+    background-color: #f9fafb; 
+    border-right: 1px solid #e5e7eb;
+}
+
+/* Estilo base de los botones del menú lateral (Aplicado a los 3 roles) */
+.student-sidebar-button, .teacher-sidebar-button, .admin-sidebar-button {
+    color: #172D62; 
+    padding: 12px 20px;
+    transition: background-color 0.2s;
+    border-left: 5px solid transparent; 
+    display: flex; 
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Hover effect para los botones del sidebar */
+.student-sidebar-button:hover, .teacher-sidebar-button:hover, .admin-sidebar-button:hover {
+    background-color: #f1f5f9; 
+}
+
+/* Estilo del botón activo del menú lateral (Aplicado a los 3 roles) */
+.student-sidebar-button.active-tab, 
+.teacher-sidebar-button.active-tab, 
+.admin-sidebar-button.active-tab {
+    background-color: #E6F0F8; /* Fondo gris claro/azul pálido para el activo */
+    border-left-color: #0b4594; /* Línea azul fuerte en la izquierda */
+    color: #0b4594; 
+    font-weight: 600;
+}
+
+
+/* ESTILOS DE NOTIFICACIÓN (TOAST) - NUEVOS ESTILOS */
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #10b981; /* Verde esmeralda para éxito */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    font-weight: 600;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(100%); /* Fuera de la pantalla */
+    display: flex;
+    align-items: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0); /* Desliza hacia arriba para mostrar */
+}
